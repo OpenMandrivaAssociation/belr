@@ -45,7 +45,8 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 %cmake \
   -DENABLE_STATIC:BOOL=NO \
   -DENABLE_STRICT:BOOL=NO \
-  -DENABLE_UNIT_TESTS=NO
+  -DENABLE_UNIT_TESTS=NO \
+  -DENABLE_TESTS:BOOL=NO
 
 %make_build
 
@@ -56,6 +57,7 @@ find %{buildroot} -name "*.la" -delete
 
 %files
 %{_bindir}/belr-parse
+%{_bindir}/belr-compiler
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.*
