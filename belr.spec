@@ -4,56 +4,56 @@
 
 Summary:	Language recognition library
 Name:		belr
-Version:	0.1.3
-Release:	2
+Version:	4.4.8
+Release:	1
 License:	GPLv3
 Group:		System/Libraries
 URL:		https://linphone.org/
-Source0:	https://linphone.org/releases/sources/belr/belr-%{version}.tar.gz
-Source1:	https://linphone.org/releases/sources/belr/belr-%{version}.tar.gz.md5
+Source0:	https://github.com/BelledonneCommunications/belr/archive/%{name}-%{version}.tar.gz
 # (wally) from OpenSUSE to install pkgconfig .pc file
 Patch0:		belr-fix-pkgconfig.patch
 # (wally) alow overriding cmake config file location from cmd line
-Patch1:         belr-0.1.3-cmake-config-location.patch
+Patch1:		belr-0.1.3-cmake-config-location.patch
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(udev)
 BuildRequires:	pkgconfig(bctoolbox)
-BuildRequires:	bctoolbox-static-devel
+BuildRequires:	pkgconfig(bctoolbox)
+
 %description
 Belr aims at parsing any input formatted according to a language defined by
 an ABNF grammar, such as the protocols standardised at IETF.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Language recognition library
 Group:		System/Libraries
 
-%description -n	%{libname}
+%description -n %{libname}
 Belr aims at parsing any input formatted according to a language defined by
 an ABNF grammar, such as the protocols standardised at IETF.
 
-%package -n	%{develname}
+%package -n %{develname}
 Summary:	Development files for %{name}
 Group:		Development/C++
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n	%{develname}
+%description -n %{develname}
 This package contains development files for %{name}
 
 %prep
-%setup -qn %{name}-%{version}-0
+%autosetup -p1
 sed -i -e 's,\r$,,' CMakeLists.txt
-%autopatch -p1
 
 %build
 %cmake \
   -DENABLE_STATIC:BOOL=NO \
   -DENABLE_STRICT:BOOL=NO \
-  -DCONFIG_PACKAGE_LOCATION:PATH=%{_libdir}/cmake/Belr
-%make
+  -DENABLE_UNIT_TESTS=NO
+
+%make_build
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 find %{buildroot} -name "*.la" -delete
 
@@ -70,4 +70,3 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/lib%{name}.so
 %{_libdir}/cmake/Belr/
 %{_libdir}/pkgconfig/%{name}.pc
-
