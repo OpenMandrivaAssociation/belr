@@ -1,21 +1,35 @@
-diff -up ./CMakeLists.txt.orig ./CMakeLists.txt
---- ./CMakeLists.txt.orig	2018-01-01 14:13:02.865582535 +0200
-+++ ./CMakeLists.txt	2018-01-01 14:14:13.859908702 +0200
-@@ -131,14 +131,14 @@ configure_file(cmake/BelrConfig.cmake.in
- 	"${CMAKE_CURRENT_BINARY_DIR}/BelrConfig.cmake"
- 	@ONLY
- )
--set(ConfigPackageLocation share/Belr/cmake)
+diff -Naur belr-4.4.8/CMakeLists.txt belr-4.4.8.tpg/CMakeLists.txt
+--- belr-4.4.8/CMakeLists.txt	2020-11-19 10:17:22.725000000 +0000
++++ belr-4.4.8.tpg/CMakeLists.txt	2020-11-19 10:21:33.487000000 +0000
+@@ -132,7 +132,7 @@
+ 
+ include(CMakePackageConfigHelpers)
+ set(EXPORT_TARGET_NAME belr)
+-set(ConfigPackageLocation "${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_TARGET_NAME}")
 +set(CONFIG_PACKAGE_LOCATION share/Belr/cmake CACHE PATH "CMake configuration file location")
- install(EXPORT ${EXPORT_TARGETS_NAME}Targets
- 	FILE BelrTargets.cmake
--	DESTINATION ${ConfigPackageLocation}
-+	DESTINATION ${CONFIG_PACKAGE_LOCATION}
+ 
+ export(EXPORT ${EXPORT_TARGET_NAME}Targets
+ 	FILE "${CMAKE_CURRENT_BINARY_DIR}/${EXPORT_TARGET_NAME}Targets.cmake"
+@@ -140,19 +140,19 @@
+ 
+ configure_package_config_file(cmake/BelrConfig.cmake.in
+ 	"${CMAKE_CURRENT_BINARY_DIR}/${EXPORT_TARGET_NAME}Config.cmake"
+-	INSTALL_DESTINATION ${ConfigPackageLocation}
++	INSTALL_DESTINATION ${CONFIG_PACKAGE_LOCATION}
+ 	NO_SET_AND_CHECK_MACRO
  )
- install(FILES
- 	"${CMAKE_CURRENT_BINARY_DIR}/BelrConfig.cmake"
+ 
+ install(EXPORT ${EXPORT_TARGET_NAME}Targets
+ 	FILE ${EXPORT_TARGET_NAME}Targets.cmake
 -	DESTINATION ${ConfigPackageLocation}
 +	DESTINATION ${CONFIG_PACKAGE_LOCATION}
  )
  
- add_subdirectory(build)
+ #Yes, an install directive is necessary. The INSTALL_DESTINATION parameter of configure_package_config_file() above does NOTHING.
+ install(FILES
+ 	"${CMAKE_CURRENT_BINARY_DIR}/${EXPORT_TARGET_NAME}Config.cmake"
+-	DESTINATION ${ConfigPackageLocation}
++	DESTINATION ${CONFIG_PACKAGE_LOCATION}
+ )
+ 
+ if (ENABLE_PACKAGE_SOURCE)

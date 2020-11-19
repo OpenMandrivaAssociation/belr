@@ -1,6 +1,20 @@
---- a/belr.pc.in
-+++ b/belr.pc.in
-@@ -4,6 +4,7 @@ prefix=@CMAKE_INSTALL_PREFIX@
+diff -Naur belr-4.4.8/CMakeLists.txt belr-4.4.8.tpg/CMakeLists.txt
+--- belr-4.4.8/CMakeLists.txt	2020-04-02 20:21:20.000000000 +0000
++++ belr-4.4.8.tpg/CMakeLists.txt	2020-11-19 10:17:22.725000000 +0000
+@@ -68,6 +68,9 @@
+ 	include_directories(${MSVC_INCLUDE_DIR})
+ endif()
+ 
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/belr.pc.in ${CMAKE_CURRENT_BINARY_DIR}/belr.pc)
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/belr.pc DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
++
+ set(STRICT_OPTIONS_CPP )
+ set(STRICT_OPTIONS_C )
+ set(STRICT_OPTIONS_CXX )
+diff -Naur belr-4.4.8/belr.pc.in belr-4.4.8.tpg/belr.pc.in
+--- belr-4.4.8/belr.pc.in	2020-04-02 20:21:20.000000000 +0000
++++ belr-4.4.8.tpg/belr.pc.in	2020-11-19 10:17:35.679000000 +0000
+@@ -4,6 +4,7 @@
  Name:  @PROJECT_NAME@
  Description: Belr is Belledonne Communications' language recognition library
  Version: @PROJECT_VERSION@
@@ -8,18 +22,3 @@
  Libs: -L@CMAKE_INSTALL_FULL_LIBDIR@ -lbelr
  Libs.private: @LIBS_PRIVATE@
  Cflags: -I@CMAKE_INSTALL_FULL_INCLUDEDIR@
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -83,6 +83,11 @@ if(MSVC)
- 	include_directories(${MSVC_INCLUDE_DIR})
- endif()
- 
-+
-+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/belr.pc.in ${CMAKE_CURRENT_BINARY_DIR}/belr.pc)
-+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/belr.pc DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-+
-+
- set(STRICT_OPTIONS_CPP )
- set(STRICT_OPTIONS_C )
- set(STRICT_OPTIONS_CXX )
-
