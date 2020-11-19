@@ -63,7 +63,7 @@ find %{buildroot} -name "*.la" -delete
 %{_libdir}/lib%{name}.so.*
 
 %files -n %{develname}
-%doc AUTHORS NEWS README.md
+%doc README.md
 %{_includedir}/%{name}/
 %{_libdir}/lib%{name}.so
 %{_libdir}/cmake/Belr/
