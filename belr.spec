@@ -12,8 +12,6 @@ URL:		https://linphone.org/
 Source0:	https://github.com/BelledonneCommunications/belr/archive/%{name}-%{version}.tar.gz
 # (wally) from OpenSUSE to install pkgconfig .pc file
 Patch0:		belr-fix-pkgconfig.patch
-# (wally) alow overriding cmake config file location from cmd line
-Patch1:		belr-0.1.3-cmake-config-location.patch
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(udev)
 BuildRequires:	bctoolbox-static-devel
