@@ -16,8 +16,7 @@ Patch0:		belr-fix-pkgconfig.patch
 Patch1:		belr-0.1.3-cmake-config-location.patch
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(udev)
-BuildRequires:	pkgconfig(bctoolbox)
-BuildRequires:	pkgconfig(bctoolbox)
+BuildRequires:	bctoolbox-static-devel
 
 %description
 Belr aims at parsing any input formatted according to a language defined by
