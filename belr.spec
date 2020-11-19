@@ -64,5 +64,5 @@ find %{buildroot} -name "*.la" -delete
 %doc README.md
 %{_includedir}/%{name}/
 %{_libdir}/lib%{name}.so
-%{_libdir}/cmake/Belr/
+%{_libdir}/cmake/?elr/
 %{_libdir}/pkgconfig/%{name}.pc
