@@ -4,12 +4,12 @@
 
 Summary:	Language recognition library
 Name:		belr
-Version:	4.4.8
+Version:	4.4.24
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
 URL:		https://linphone.org/
-Source0:	https://github.com/BelledonneCommunications/belr/archive/%{name}-%{version}.tar.gz
+Source0:	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.bz2
 # (wally) from OpenSUSE to install pkgconfig .pc file
 Patch0:		belr-fix-pkgconfig.patch
 BuildRequires:	cmake
@@ -24,6 +24,12 @@ an ABNF grammar, such as the protocols standardised at IETF.
 Summary:	Language recognition library
 Group:		System/Libraries
 
+%files
+%{_bindir}/belr-parse
+%{_bindir}/belr-compiler
+
+#---------------------------------------------------------------------------
+
 %description -n %{libname}
 Belr aims at parsing any input formatted according to a language defined by
 an ABNF grammar, such as the protocols standardised at IETF.
@@ -34,8 +40,22 @@ Group:		Development/C++
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
+%files -n %{libname}
+%{_libdir}/lib%{name}.so.*
+
+#---------------------------------------------------------------------------
+
 %description -n %{develname}
 This package contains development files for %{name}
+
+%files -n %{develname}
+%doc README.md
+%{_includedir}/%{name}/
+%{_libdir}/lib%{name}.so
+%{_libdir}/cmake/?elr/
+%{_libdir}/pkgconfig/%{name}.pc
+
+#---------------------------------------------------------------------------
 
 %prep
 %autosetup -p1
@@ -54,17 +74,3 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 %make_install -C build
 
 find %{buildroot} -name "*.la" -delete
-
-%files
-%{_bindir}/belr-parse
-%{_bindir}/belr-compiler
-
-%files -n %{libname}
-%{_libdir}/lib%{name}.so.*
-
-%files -n %{develname}
-%doc README.md
-%{_includedir}/%{name}/
-%{_libdir}/lib%{name}.so
-%{_libdir}/cmake/?elr/
-%{_libdir}/pkgconfig/%{name}.pc
