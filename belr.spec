@@ -20,30 +20,30 @@ BuildRequires:	bctoolbox-static-devel
 Belr aims at parsing any input formatted according to a language defined by
 an ABNF grammar, such as the protocols standardised at IETF.
 
-%package -n %{libname}
-Summary:	Language recognition library
-Group:		System/Libraries
-
 %files
 %{_bindir}/belr-parse
 %{_bindir}/belr-compiler
 
 #---------------------------------------------------------------------------
 
+%package -n %{libname}
+Summary:	Language recognition library
+Group:		System/Libraries
+
 %description -n %{libname}
 Belr aims at parsing any input formatted according to a language defined by
 an ABNF grammar, such as the protocols standardised at IETF.
+
+%files -n %{libname}
+%{_libdir}/lib%{name}.so.*
+
+#---------------------------------------------------------------------------
 
 %package -n %{develname}
 Summary:	Development files for %{name}
 Group:		Development/C++
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-
-%files -n %{libname}
-%{_libdir}/lib%{name}.so.*
-
-#---------------------------------------------------------------------------
 
 %description -n %{develname}
 This package contains development files for %{name}
