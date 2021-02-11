@@ -15,6 +15,7 @@ Patch0:		belr-fix-pkgconfig.patch
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(udev)
 BuildRequires:	bctoolbox-static-devel
+BuildRequires:  ninja
 
 %description
 Belr aims at parsing any input formatted according to a language defined by
@@ -66,11 +67,12 @@ sed -i -e 's,\r$,,' CMakeLists.txt
   -DENABLE_STATIC:BOOL=NO \
   -DENABLE_STRICT:BOOL=NO \
   -DENABLE_UNIT_TESTS=NO \
-  -DENABLE_TESTS:BOOL=NO
+  -DENABLE_TESTS:BOOL=NO \
+  -G Ninja
 
-%make_build
+%ninja_build
 
 %install
-%make_install -C build
+%ninja_install -C build
 
 find %{buildroot} -name "*.la" -delete
