@@ -1,10 +1,10 @@
 %define major 1
-%define libname %mklibname %{name} %{major}
-%define develname %mklibname %{name} -d
+%define libname %mklibname %{name}
+%define devname %mklibname %{name} -d
 
 Summary:	Language recognition library
 Name:		belr
-Version:	5.1.61
+Version:	5.1.67
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -40,16 +40,16 @@ an ABNF grammar, such as the protocols standardised at IETF.
 
 #---------------------------------------------------------------------------
 
-%package -n %{develname}
+%package -n %{devname}
 Summary:	Development files for %{name}
 Group:		Development/C++
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %{develname}
+%description -n %{devname}
 This package contains development files for %{name}
 
-%files -n %{develname}
+%files -n %{devname}
 %doc README.md
 %{_includedir}/%{name}/
 %{_libdir}/lib%{name}.so
@@ -65,7 +65,7 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 %build
 %cmake \
   -DENABLE_STATIC:BOOL=NO \
-  -DENABLE_STRICT:BOOL=NO \
+  -DENABLE_STRICT:BOOL=YES \
   -DENABLE_UNIT_TESTS=NO \
   -DENABLE_TESTS:BOOL=NO \
   -G Ninja
