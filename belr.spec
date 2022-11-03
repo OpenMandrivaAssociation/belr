@@ -2,6 +2,10 @@
 %define libname %mklibname %{name}
 %define devname %mklibname %{name} -d
 
+%bcond_with	static
+%bcond_without	strict
+%bcond_with	tests
+
 Summary:	Language recognition library
 Name:		belr
 Version:	5.1.67
@@ -64,11 +68,11 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 
 %build
 %cmake \
-  -DENABLE_STATIC:BOOL=NO \
-  -DENABLE_STRICT:BOOL=YES \
-  -DENABLE_UNIT_TESTS=NO \
-  -DENABLE_TESTS:BOOL=NO \
-  -G Ninja
+	-DENABLE_STRICT:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
+	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
+	-DENABLE_UNIT_TESTS:BOOL=%{?with_tests:ON}%{?!with_tests:OFF} \
+	-DENABLE_TESTS:BOOL=%{?with_tests:ON}%{?!with_tests:OFF} \
+	-G Ninja
 
 %ninja_build
 
