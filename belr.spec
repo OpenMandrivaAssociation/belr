@@ -68,8 +68,8 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 
 %build
 %cmake \
-	-DENABLE_STRICT:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
 	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
+	-DENABLE_STRICT:BOOL=%{?with_strict:ON}%{?!with_strict:OFF} \
 	-DENABLE_UNIT_TESTS:BOOL=%{?with_tests:ON}%{?!with_tests:OFF} \
 	-DENABLE_TESTS:BOOL=%{?with_tests:ON}%{?!with_tests:OFF} \
 	-G Ninja
