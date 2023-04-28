@@ -8,8 +8,8 @@
 
 Summary:	Language recognition library
 Name:		belr
-Version:	5.2.37
-Release:	2
+Version:	5.2.53
+Release:	1
 License:	GPLv3
 Group:		System/Libraries
 URL:		https://linphone.org/
