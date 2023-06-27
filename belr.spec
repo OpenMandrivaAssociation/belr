@@ -8,7 +8,7 @@
 
 Summary:	Language recognition library
 Name:		belr
-Version:	5.2.64
+Version:	5.2.73
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
