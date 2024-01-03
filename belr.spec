@@ -14,8 +14,7 @@ License:	GPLv3
 Group:		System/Libraries
 URL:		https://linphone.org/
 Source0:	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# (wally) from OpenSUSE to install pkgconfig .pc file
-Patch0:		belr-fix-pkgconfig.patch
+Patch0:		belr-5.3.6-fix-pkgconfig.patch
 BuildRequires:	cmake
 BuildRequires:  ninja
 BuildRequires:	pkgconfig(udev)
