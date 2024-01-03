@@ -17,9 +17,9 @@ Source0:	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{na
 # (wally) from OpenSUSE to install pkgconfig .pc file
 Patch0:		belr-fix-pkgconfig.patch
 BuildRequires:	cmake
-BuildRequires:	pkgconfig(udev)
-BuildRequires:	bctoolbox-static-devel
 BuildRequires:  ninja
+BuildRequires:	pkgconfig(udev)
+BuildRequires:	cmake(bctoolbox)
 
 %description
 Belr aims at parsing any input formatted according to a language defined by
