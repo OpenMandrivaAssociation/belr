@@ -3,7 +3,7 @@
 %define devname %mklibname %{name} -d
 
 # exclude unwanted cmake requires
-%global __provides_exclude_from ^%{_datadir}/cmake/*/Find.*cmake$
+%global __provides_exclude_from ^%{_datadir}/cmake/.*/Find.*cmake$
 
 %bcond_with	static
 %bcond_without	strict
@@ -12,7 +12,7 @@
 Summary:	Language recognition library
 Name:		belr
 Version:	5.3.15
-Release:	2
+Release:	3
 License:	GPLv3
 Group:		System/Libraries
 URL:		https://linphone.org/
