@@ -81,4 +81,5 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 %install
 %ninja_install -C build
 
-find %{buildroot} -name "*.la" -delete
+#find %{buildroot} -name "*.la" -delete
+
