@@ -11,8 +11,8 @@
 
 Summary:	Language recognition library
 Name:		belr
-Version:	5.3.15
-Release:	3
+Version:	5.3.19
+Release:	1
 License:	GPLv3
 Group:		System/Libraries
 URL:		https://linphone.org/
