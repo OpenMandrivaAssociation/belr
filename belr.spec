@@ -5,13 +5,13 @@
 # exclude unwanted cmake requires
 %global __provides_exclude_from ^%{_datadir}/cmake/.*/Find.*cmake$
 
-%bcond_with	static
-%bcond_without	strict
-%bcond_with	tests
+%bcond strict			1
+%bcond unit_tests		1
+%bcond unit_tests_install	0
 
 Summary:	Language recognition library
 Name:		belr
-Version:	5.3.93
+Version:	5.3.94
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -28,8 +28,12 @@ Belr aims at parsing any input formatted according to a language defined by
 an ABNF grammar, such as the protocols standardised at IETF.
 
 %files
-%{_bindir}/belr-parse
-%{_bindir}/belr-compiler
+%{_bindir}/%{name}-parse
+%{_bindir}/%{name}-compiler
+%if %{with unit_tests} && %{with unit_tests_install}
+%{_bindir}/%{name}-tester
+%{_datadir}/%{name}-tester/
+%endif
 
 #---------------------------------------------------------------------------
 
@@ -43,6 +47,7 @@ an ABNF grammar, such as the protocols standardised at IETF.
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.*
+%{_datadir}/belr/grammars/belr-grammar-example.blr
 
 #---------------------------------------------------------------------------
 
@@ -70,9 +75,8 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 
 %build
 %cmake \
-	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
 	-DENABLE_STRICT:BOOL=%{?with_strict:ON}%{?!with_strict:OFF} \
-	-DENABLE_UNIT_TESTS:BOOL=%{?with_tests:ON}%{?!with_tests:OFF} \
+	-DENABLE_UNIT_TESTS:BOOL=%{?with_unit_tests:ON}%{?!with_unit_tests:OFF} \
 	-DENABLE_TESTS:BOOL=%{?with_tests:ON}%{?!with_tests:OFF} \
 	-G Ninja
 
@@ -80,4 +84,17 @@ sed -i -e 's,\r$,,' CMakeLists.txt
 
 %install
 %ninja_install -C build
+
+# don't install unit tester
+%if %{with unit_tests} && ! %{with unit_tests_install}
+rm -f  %{buildroot}%{_bindir}/%{name}-tester
+rm -fr %{buildroot}%{_datadir}/%{name}-tester/
+%endif
+
+%check
+%if %{with unit_tests}
+pushd build
+ctest
+popd
+%endif
 
