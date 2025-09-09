@@ -17,11 +17,13 @@ License:	GPLv3
 Group:		System/Libraries
 URL:		https://linphone.org/
 Source0:	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.bz2
-Patch0:		belr-5.3.6-fix-pkgconfig.patch
 BuildRequires:	cmake
 BuildRequires:  ninja
 BuildRequires:	pkgconfig(udev)
 BuildRequires:	cmake(bctoolbox)
+
+%patchlist
+belr-5.4.42-fix-pkgconfig.patch
 
 %description
 Belr aims at parsing any input formatted according to a language defined by

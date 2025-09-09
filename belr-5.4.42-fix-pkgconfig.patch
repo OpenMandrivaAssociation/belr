@@ -1,15 +1,15 @@
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -66,6 +66,9 @@ include_directories(
- 	${CMAKE_CURRENT_BINARY_DIR}
- )
+@@ -69,6 +69,9 @@ include_directories(
+ set(BELR_GRAMMARS_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/belr/grammars")
+ set(BELR_GRAMMARS_RELATIVE_DIR "${CMAKE_INSTALL_DATADIR}/belr/grammars")
  
 +configure_file(${CMAKE_CURRENT_SOURCE_DIR}/belr.pc.in ${CMAKE_CURRENT_BINARY_DIR}/belr.pc)
 +install(FILES ${CMAKE_CURRENT_BINARY_DIR}/belr.pc DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 +
- set(STRICT_OPTIONS_CPP )
- set(STRICT_OPTIONS_C )
- set(STRICT_OPTIONS_CXX )
+ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config.h")
+ 
+ add_subdirectory(include)
 --- a/belr.pc.in
 +++ b/belr.pc.in
 @@ -4,6 +4,7 @@
